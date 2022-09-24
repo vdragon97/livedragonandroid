@@ -7,7 +7,6 @@ import time
 import sys
 from datetime import datetime, timedelta, date
 from colorama import init, Fore, Back, Style
-
 init(convert=True)
 
 def daterange(date1, date2):
@@ -41,21 +40,19 @@ def callLiveDragon(checkDate, checkContract, checkSensitive, checkFromTime, chec
     table = intradaySearch.intradaySearchFunction(checkDate, checkContract, checkSensitive, Cookie, checkFromTime, checkToTime)
     return table
 if __name__=="__main__":
-    previousTableRowCount = 0
     while(True):
         if (len(sys.argv) == 6):
             #single date
-            tableRowCount = callLiveDragon(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], previousTableRowCount)
+            table = callLiveDragon(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
         elif (len(sys.argv) == 7):
             #from date to date
             fromDate = datetime.strptime(sys.argv[1], "%d/%m/%Y")
             toDate = datetime.strptime(sys.argv[2], "%d/%m/%Y")
             for dt in daterange(fromDate, toDate):
-                tableRowCount = callLiveDragon(dt.strftime("%d/%m/%Y"), sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6], previousTableRowCount)
+                table = callLiveDragon(dt.strftime("%d/%m/%Y"), sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6])
         else: 
             #print(datetime.now().strftime("%d/%m/%Y"))
             #print("VN30F" + datetime.now().strftime("%Y")[2:4] + datetime.now().strftime("%m"))
-            tableRowCount = callLiveDragon(datetime.now().strftime("%d/%m/%Y"), "VN30F" + datetime.now().strftime("%Y")[2:4] + datetime.now().strftime("%m"), "0.8", "09:00:00", "14:30:00", previousTableRowCount)
+            table = callLiveDragon(datetime.now().strftime("%d/%m/%Y"), "VN30F" + datetime.now().strftime("%Y")[2:4] + datetime.now().strftime("%m"), "0.8", "09:00:00", "14:30:00")
             #print("--------------------------------------------------")
-        previousTableRowCount = tableRowCount
         time.sleep(10)

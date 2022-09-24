@@ -12,8 +12,8 @@ class MyApp(MDApp):
     def build(self):
         self.title = 'WShale Combat - Deceiful Candle'
         layout = AnchorLayout()
-        tableData = livedragonMain.callLiveDragon(datetime.now().strftime("%d/%m/%Y"), "VN30F2210", "0.8", "09:00:00", "14:30:00")
-        
+        tableData = livedragonMain.callLiveDragon("22/09/2022", "VN30F2210", "0.8", "09:00:00", "14:30:00")
+        print(tableData)
         screen = Screen()
         table = MDDataTable(
             size_hint=(1, 1),

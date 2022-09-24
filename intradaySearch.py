@@ -5,7 +5,7 @@ from requests.structures import CaseInsensitiveDict
 from datetime import datetime
 from colorama import init, Fore, Back, Style
 import os
-#import chatBotTelegram
+import chatBotTelegram
 import prettytable as pt
 '''
 python livedragon.py inputDate inputMode
@@ -91,7 +91,8 @@ def intradaySearchFunction(inputDate, inputContract, inputSensitive, inputCookie
                     if gapLongVol > 3000:
                         table.add_row([trTime, mprice + "L", str(f"{gapLongVol:,d}")])
                         tupleElement = (trTime, )
-                        tupleElement = tupleElement + ((mprice + "L"),)
+                        tupleElement = tupleElement + (mprice,)
+                        tupleElement = tupleElement + ("LONG",)
                         tupleElement = tupleElement + (str(f"{gapLongVol:,d}"), )
                         tableData.append(tupleElement)
                         tupleElement = ()
@@ -119,7 +120,8 @@ def intradaySearchFunction(inputDate, inputContract, inputSensitive, inputCookie
                     if gapShortVol > 3000:
                         table.add_row([trTime, mprice + "S", str(f"{gapShortVol:,d}")])
                         tupleElement = (trTime, )
-                        tupleElement = tupleElement + ((mprice + "S"),)
+                        tupleElement = tupleElement + (mprice,)
+                        tupleElement = tupleElement + ("SHORT",)
                         tupleElement = tupleElement + (str(f"{gapShortVol:,d}"), )
                         tableData.append(tupleElement)
                         tupleElement = ()
@@ -181,11 +183,13 @@ def intradaySearchFunction(inputDate, inputContract, inputSensitive, inputCookie
     #print ("---------------------------------------------------------------------------")
     #print(table)
     #return "0"
-    tupleElement = (str(datetime.strptime(inputDate, '%d/%m/%Y').date()).replace('-',''),)
+    tupleElement = (datetime.now().strftime("%H:%M:%S"),)
+    tupleElement = tupleElement + (str(datetime.strptime(inputDate, '%d/%m/%Y').date()).replace('-',''),)
     tupleElement = tupleElement + (resultLongShort,)
     tupleElement = tupleElement + (str(f"{abs(diffLongShort):,d}"), )
     tableData.append(tupleElement)
     print("tableData" + str(tableData) )
+    chatBotTelegram.send_test_message(f'<pre>{tableData}</pre>') 
     return tableData
 if __name__=="__main__":
     intradaySearchFunction("05/08/2022", "VN30F2208", "0.8", "09:00:00", "14:30:00")
