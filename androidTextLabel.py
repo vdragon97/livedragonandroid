@@ -6,7 +6,9 @@ from kivy.uix.label import Label
 class MyApp(App):
     def build(self):
         self.title = 'Whale Combat - Deceiful Candle'
-        return Label(text = userReadTelegramSMS.__loadLastMessage__())
-        
+        try:
+            return Label(text = userReadTelegramSMS.__loadLastMessage__())
+        except:
+            return Label(text = "No information found")
 if __name__ == "__main__":
     MyApp().run()
