@@ -21,10 +21,10 @@ class MyApp(MDApp):
             tableData = ast.literal_eval("[('No','Data','Found','Today')]")
         print(tableData)
         table = MDDataTable(
-            size_hint=(1, 1),
+            size_hint = (1, 1),
             pos_hint = {'center_x': 0.1, 'center_y': 0.1},
             rows_num = 200,
-            use_pagination=True,
+            use_pagination = True,
             column_data = [
                 ("  Time", dp(20)),
                 ("  Price", dp(20)),
