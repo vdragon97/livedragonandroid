@@ -1,9 +1,4 @@
-import livedragonMain
-import time
-from datetime import datetime
-from kivy.lang import Builder
 from kivymd.app import MDApp
-from kivymd.uix.screen import Screen
 from kivymd.uix.datatables import MDDataTable
 from kivy.uix.anchorlayout import AnchorLayout
 from kivy.metrics import dp
@@ -15,6 +10,7 @@ class MyApp(MDApp):
     def build(self):
         self.title = 'Whale Combat - Deceiful Candle'
         self.layout = AnchorLayout()
+        #screen = Screen()
         Clock.schedule_interval(self.UpdateTelegramSMS, 10)
         return self.layout
         
@@ -24,7 +20,6 @@ class MyApp(MDApp):
         except:
             tableData = ast.literal_eval("[('No','Data','Found','Today')]")
         print(tableData)
-        screen = Screen()
         table = MDDataTable(
             size_hint=(1, 1),
             pos_hint = {'center_x': 0.1, 'center_y': 0.1},
@@ -38,6 +33,8 @@ class MyApp(MDApp):
             ],
             row_data = tableData
             )
+        #self.layout.remove_widget(table)
+        self.layout.clear_widgets()    
         self.layout.add_widget(table)
 if __name__ == "__main__":
     MyApp().run()
