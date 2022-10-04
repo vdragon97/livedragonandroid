@@ -38,6 +38,7 @@ def callLiveDragon(checkDate, checkContract, checkSensitive, checkFromTime, chec
     #tableRowCount = intradaySearch.intradaySearchFunction(checkDate, checkContract, checkSensitive, Cookie, checkFromTime, checkToTime, previousTableRowCount)
     #return tableRowCount
     table = intradaySearch.intradaySearchFunction(checkDate, checkContract, checkSensitive, Cookie, checkFromTime, checkToTime)
+    intradaySearch.intradaySearchJsonFunction(checkDate, checkContract, checkSensitive, Cookie, checkFromTime, checkToTime)
     return table
 if __name__=="__main__":
     while(True):

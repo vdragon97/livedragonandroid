@@ -1,5 +1,7 @@
 import telegram
+import requests
 from telegram import ParseMode
+from requests.structures import CaseInsensitiveDict
 
 def send_test_message(inputMessage):
     try:
@@ -12,5 +14,15 @@ def send_test_message(inputMessage):
     except Exception as ex:
         print(ex)
         print("---------------------------chatBotTelegram error---------------------------")
-
+        
+def send_json_message(inputMessage):
+    try:
+        url = "https://api.telegram.org/bot5481822840:AAE1vS9H6fZXsFfsRAKqYjbTGbS-l-gMUTk/sendMessage?chat_id=-1001705730750"
+        headers = CaseInsensitiveDict()
+        headers["Content-Type"] = "application/json"
+        resp = requests.post(url, headers=headers, json=inputMessage)
+        print(resp.status_code)
+    except Exception as ex:
+        print(ex)
+        print("---------------------------chatBotTelegram error---------------------------")
 #send_test_message("Hello there!!!")
